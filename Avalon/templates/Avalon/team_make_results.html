@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote results of team making up!</title>
+</head>
+<body>
+    <p>Captain: {{ current_try.captain }}</p>
+    <p>Team member: {{ current_try.team_member }}</p>
+    <p>Supporters: {{ current_try.supporters }}</p>
+    <p>Objectors: {{ current_try.objectors }}</p>
+    {% if current_try.supporter_num >= 3 %}
+        <p>Succeeded to make up the team!</p>
+        <a href="{% url 'Voting_for_tasks' game_id task_num try_num player_name%}">Vote for task now!</a>
+    {% else %}
+        <p>Failed to make up the team!</p>
+        <a href="{% url 'team_makeup' game_id task_num try_num player_name%}">Remake the team!</a>
+    {% endif %}
+
+</body>
+</html>

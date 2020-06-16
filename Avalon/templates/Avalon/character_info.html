@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Info</title>
+</head>
+<body>
+    <p>Your name: {{ player_name }}</p>
+    <p>Your character: {{ character }}</p>
+    <p>{{ character_intro}}</p>
+
+    <a href="{% url 'team_makeup' game_id task_num try_num player_name%}">Next Step</a>
+</body>
+</html>

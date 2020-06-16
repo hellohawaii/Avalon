@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+</head>
+<body>
+    <form action="{% url 'creating_game' %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="game_id" min="0" max="9999" id="game_id">
+    <label for="game_id"> Game ID </label><br>
+    <input type="text" name="user_name" id="user_name">
+    <label for="user_name"> User Name </label><br>
+    <input type="submit" value="create/join a game">
+</form>
+</body>
+</html>

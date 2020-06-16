@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make up team now!</title>
+</head>
+<body>
+    {% if is_captain %}
+        {% if team_selected %}
+            <p>Your choice:</p>
+            {% for player in team_selected %}
+                <p>{{ player}}</p>
+            {% endfor %}
+            <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
+            {% csrf_token %}
+            <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
+            <label for="choice1">I agree with the makeup</label><br>
+            <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
+            <label for="choice2">I agree with the makeup</label><br>
+            <input type="submit" value="vote">
+            </form>
+        {% else %}
+            <p>You are caption! Please select {{ team_size }} team members!</p>
+            <form action="{% url 'update_team_info' game_id task_num try_num player_name team_size%}" method="post">
+            {% csrf_token %}
+            {% for player in  players %}
+                <input type="checkbox" name="team_member{{ forloop.counter }}" id="choice{{ forloop.counter }}"
+                       value={{ player.player_name }}>
+                <label for="choice{{ forloop.counter }}">{{ player.player_name }}</label><br>
+            {% endfor %}
+            <input type="submit" value="submit!">
+            </form>
+        {% endif %}
+    {% else %}
+        {% if team_selected %}
+            <p>Captain's choice:</p>
+            {% for player in team_selected %}
+                <p>{{ player}}</p>
+            {% endfor %}
+            <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
+            {% csrf_token %}
+            <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
+            <label for="choice1">I agree with the makeup</label><br>
+            <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
+            <label for="choice2">I agree with the makeup</label><br>
+            <input type="submit" value="vote">
+            </form>
+        {% else %}
+            <p>Please waiting for Captain choosing people to make up the team.</p>
+            <p>Refresh this page after finishing choosing!</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
