@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Results</title>
+</head>
+<body>
+    <p>Current team members:</p>
+    {% for player in team_members %}
+        <p>{{ player}}</p>
+    {% endfor %}
+    <p>supporters'num: {{ supporters_num }}</p>
+    <p>objectors'num: {{ objectors_num }}</p>
+    {% if objectors_num != 0 %}
+        <p>Task failed!</p>
+    {% else %}
+        <p>Task Succeeded!</p>
+    {% endif %}
+    {% if finished_tasks_num == 3 %}
+        <p>3 task finished in total, Morgana and Assassin have a last change to win by assassinating Merlin</p>
+        <a href="{% url 'assassinate_vote' game_id player_name%}">Who is Merlin?</a>
+    {% else if failed_tasks_num ==3 %}
+        <p>3 task failed in total, Morgana and Assassin win!</p>
+    {% else %}
+        <a href="{% url 'team_makeup' game_id task_num try_num player_name%}">Next Task!</a>
+    {% endif %}
+</body>
+</html>

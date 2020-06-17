@@ -13,6 +13,12 @@ urlpatterns = [
          views.update_team_info, name='update_team_info'),
     path('team_makeup_vote/<str:game_id>/<int:task_num>/<int:try_num>/<str:player_name>',
          views.team_makeup_vote, name='team_makeup_vote'),
-    path('waiting_team_vote/<str:game_id>/<int:task_num>/<int:try_num>',
+    path('waiting_team_vote/<str:game_id>/<int:task_num>/<int:try_num>/<str:player_name>',
          views.waiting_team_vote, name='waiting_team_vote'),
+    path('voting_for_tasks/<str:game_id>/<int:task_num>/<str:player_name>',
+         views.vote_for_task, name='voting_for_tasks'),
+    path('task_vote/<str:game_id>/<int:task_num>/<str:player_name>', views.task_vote, name='task_vote'),
+    path('waiting_task_vote/<str:game_id>/<int:task_num>/<str:player_name>',
+         views.waiting_task_vote, name='waiting_task_vote'),
+    path('assassinate_vote/<str:game_id>/<str:player_name>', views.assassinate_vote, name='assassinate_vote'),
 ]

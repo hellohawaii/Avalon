@@ -11,14 +11,18 @@
             {% for player in team_selected %}
                 <p>{{ player}}</p>
             {% endfor %}
-            <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
-            {% csrf_token %}
-            <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
-            <label for="choice1">I agree with the makeup</label><br>
-            <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
-            <label for="choice2">I agree with the makeup</label><br>
-            <input type="submit" value="vote">
-            </form>
+            {% if try_num < 5 %}
+                <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
+                {% csrf_token %}
+                <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
+                <label for="choice1">I agree with the makeup</label><br>
+                <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
+                <label for="choice2">I agree with the makeup</label><br>
+                <input type="submit" value="vote">
+                </form>
+            {% else %}
+                <a href="{% url 'voting_for_tasks' game_id task_num player_name%}">Vote for task now!</a>
+            {% endif %}
         {% else %}
             <p>You are caption! Please select {{ team_size }} team members!</p>
             <form action="{% url 'update_team_info' game_id task_num try_num player_name team_size%}" method="post">
@@ -37,14 +41,18 @@
             {% for player in team_selected %}
                 <p>{{ player}}</p>
             {% endfor %}
-            <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
-            {% csrf_token %}
-            <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
-            <label for="choice1">I agree with the makeup</label><br>
-            <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
-            <label for="choice2">I agree with the makeup</label><br>
-            <input type="submit" value="vote">
-            </form>
+            {% if try_num < 5 %}
+                <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
+                {% csrf_token %}
+                <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
+                <label for="choice1">I agree with the makeup</label><br>
+                <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
+                <label for="choice2">I agree with the makeup</label><br>
+                <input type="submit" value="vote">
+                </form>
+            {% else %}
+                <a href="{% url 'voting_for_tasks' game_id task_num player_name%}">Vote for task now!</a>
+            {% endif %}
         {% else %}
             <p>Please waiting for Captain choosing people to make up the team.</p>
             <p>Refresh this page after finishing choosing!</p>

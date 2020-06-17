@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting for the task now!</title>
+</head>
+<body>
+    <form action="{% url 'task_vote' game_id task_num player_name%}" method="post">
+    {% csrf_token %}
+    <input type="radio" name="task_vote" id="choice1" value='True'>
+    <label for="choice1">Task succeeded</label><br>
+    {% if is_wicked %}
+        <input type="radio" name="task_vote" id="choice2" value='False'>
+        <label for="choice2">Task failed</label><br>
+    {% endif %}
+    <input type="submit" value="submit">
+    </form>
+</body>
+</html>

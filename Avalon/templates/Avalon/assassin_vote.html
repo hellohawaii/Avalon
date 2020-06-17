@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find out Merlin!</title>
+</head>
+<body>
+    <p>You are assassin, find Merlin and assassinate him to help your team win!</p>
+    <form action="{% url 'assassinate_results' game_id player_name%}" method="post">
+    {% csrf_token %}
+    {% for player in  players %}
+        <input type="radio" name="assassinate_choice" id="choice{{ forloop.counter }}"
+               value={{ player.player_name }}>
+        <label for="choice{{ forloop.counter }}">{{ player.player_name }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Assassinate him!">
+    </form>
+</body>
+</html>

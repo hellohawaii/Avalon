@@ -29,13 +29,17 @@ class AvalonGame(models.Model):
     game_id = models.IntegerField(default=0)
     assigned_characters = []
     remained_characters = ["Merlin", "Percival", "Loyal Servant of Arthur", "Morgana", "Assassin"]
-    current_task = 0
+    # current_task = 0
     team_size = [2, 3, 2, 3, 3]
     task1 = Task()
     task2 = Task()
     task3 = Task()
     task4 = Task()
     task5 = Task()
+    success_tasks_num = 0
+    fail_tasks_num = 0
+    Assassin_success = False
+    Assassin_fail = False
     tasks = [task1, task2, task3, task4, task5]
     captain_before = random.randrange(0, 5)
 
