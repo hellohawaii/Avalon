@@ -7,6 +7,11 @@
 <body>
     {% if is_captain %}
         {% if team_selected %}
+            <p>Player list:
+            {% for player in  players %}
+                {{ player.player_name }}
+            {% endfor %}
+            </p>
             <p>Your choice:</p>
             {% for player in team_selected %}
                 <p>{{ player.player_name}}</p>
@@ -37,6 +42,11 @@
         {% endif %}
     {% else %}
         {% if team_selected %}
+            <p>Player list:
+            {% for player in  players %}
+                {{ player.player_name }}
+            {% endfor %}
+            </p>
             <p>Captain {{ captain_name }}'s choice:</p>
             {% for player in team_selected %}
                 <p>{{ player.player_name}}</p>

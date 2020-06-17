@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from Avalon.models import AvalonGame, TryTeamSupporter, TryTeamObjector
+from Avalon.models import AvalonGame, TryTeamSupporter, TryTeamObjector, TaskSupporter, TaskObjector
 import random
 
 
