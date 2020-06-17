@@ -9,7 +9,7 @@
         {% if team_selected %}
             <p>Your choice:</p>
             {% for player in team_selected %}
-                <p>{{ player}}</p>
+                <p>{{ player.player_name}}</p>
             {% endfor %}
             {% if try_num < 5 %}
                 <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
@@ -17,7 +17,7 @@
                 <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
                 <label for="choice1">I agree with the makeup</label><br>
                 <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
-                <label for="choice2">I agree with the makeup</label><br>
+                <label for="choice2">I disagree with the makeup</label><br>
                 <input type="submit" value="vote">
                 </form>
             {% else %}
@@ -37,9 +37,9 @@
         {% endif %}
     {% else %}
         {% if team_selected %}
-            <p>Captain's choice:</p>
+            <p>Captain {{ cacptain_name }}'s choice:</p>
             {% for player in team_selected %}
-                <p>{{ player}}</p>
+                <p>{{ player.player_name}}</p>
             {% endfor %}
             {% if try_num < 5 %}
                 <form action="{% url 'team_makeup_vote' game_id task_num try_num player_name%}" method="post">
@@ -47,14 +47,14 @@
                 <input type="radio" name="team_makeup_vote" id="choice1" value='True'>
                 <label for="choice1">I agree with the makeup</label><br>
                 <input type="radio" name="team_makeup_vote" id="choice2" value='False'>
-                <label for="choice2">I agree with the makeup</label><br>
+                <label for="choice2">I disagree with the makeup</label><br>
                 <input type="submit" value="vote">
                 </form>
             {% else %}
                 <a href="{% url 'voting_for_tasks' game_id task_num player_name%}">Vote for task now!</a>
             {% endif %}
         {% else %}
-            <p>Please waiting for Captain choosing people to make up the team.</p>
+            <p>Please waiting for Captain {{ cacptain_name }} choosing people to make up the team.</p>
             <p>Refresh this page after finishing choosing!</p>
         {% endif %}
     {% endif %}
