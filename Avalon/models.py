@@ -54,14 +54,14 @@ class TryTeamMember(models.Model):
     team = models.ForeignKey(TryTeam, on_delete=models.CASCADE)
 
 
-class FinalTeam(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    captain_name = models.CharField(max_length=200, default="")
+# class FinalTeam(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+#     captain_name = models.CharField(max_length=200, default="")
 
 
-class FinalTeamMember(models.Model):
-    player_name = models.CharField(max_length=200)
-    team = models.ForeignKey(FinalTeam, on_delete=models.CASCADE)
+# class FinalTeamMember(models.Model):
+#     player_name = models.CharField(max_length=200)
+#     team = models.ForeignKey(FinalTeam, on_delete=models.CASCADE)
 
 
 class TryTeamSupporter(models.Model):
@@ -72,16 +72,6 @@ class TryTeamSupporter(models.Model):
 class TryTeamObjector(models.Model):
     player_name = models.CharField(max_length=200)
     team = models.ForeignKey(TryTeam, on_delete=models.CASCADE)
-
-
-class FinalTeamSupporter(models.Model):
-    player_name = models.CharField(max_length=200)
-    team = models.ForeignKey(FinalTeam, on_delete=models.CASCADE)
-
-
-class FinalTeamObjector(models.Model):
-    player_name = models.CharField(max_length=200)
-    team = models.ForeignKey(FinalTeam, on_delete=models.CASCADE)
 
 
 class AssignedCharacter(models.Model):

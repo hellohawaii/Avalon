@@ -6,7 +6,7 @@
 </head>
 <body>
     <p>You are assassin, find Merlin and assassinate him to help your team win!</p>
-    <form action="{% url 'assassinate_results' game_id player_name%}" method="post">
+    <form action="{% url 'assassinate_results' game_id%}" method="post">
     {% csrf_token %}
     {% for player in  players %}
         <input type="radio" name="assassinate_choice" id="choice{{ forloop.counter }}"

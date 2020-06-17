@@ -21,4 +21,5 @@ urlpatterns = [
     path('waiting_task_vote/<str:game_id>/<int:task_num>/<str:player_name>',
          views.waiting_task_vote, name='waiting_task_vote'),
     path('assassinate_vote/<str:game_id>/<str:player_name>', views.assassinate_vote, name='assassinate_vote'),
+    path('assassinate_results/<str:game_id>', views.assassinate_results, name='assassinate_results')
 ]

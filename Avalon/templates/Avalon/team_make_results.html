@@ -21,7 +21,7 @@
             {{ objector.player_name }}
         {% endfor %}
     </p>
-    {% if current_try.supporter_num >= 3 %}
+    {% if supporter_num >= 3 %}
         <p>Succeeded to make up the team!</p>
         <a href="{% url 'voting_for_tasks' game_id task_num player_name%}">Vote for task now!</a>
     {% else %}

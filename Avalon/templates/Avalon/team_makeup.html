@@ -37,7 +37,7 @@
         {% endif %}
     {% else %}
         {% if team_selected %}
-            <p>Captain {{ cacptain_name }}'s choice:</p>
+            <p>Captain {{ captain_name }}'s choice:</p>
             {% for player in team_selected %}
                 <p>{{ player.player_name}}</p>
             {% endfor %}
@@ -54,7 +54,7 @@
                 <a href="{% url 'voting_for_tasks' game_id task_num player_name%}">Vote for task now!</a>
             {% endif %}
         {% else %}
-            <p>Please waiting for Captain {{ cacptain_name }} choosing people to make up the team.</p>
+            <p>Please waiting for Captain {{ captain_name }} choosing people to make up the team.</p>
             <p>Refresh this page after finishing choosing!</p>
         {% endif %}
     {% endif %}

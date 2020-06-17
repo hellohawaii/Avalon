@@ -19,7 +19,7 @@
     {% if finished_tasks_num == 3 %}
         <p>3 task finished in total, Morgana and Assassin have a last change to win by assassinating Merlin</p>
         <a href="{% url 'assassinate_vote' game_id player_name%}">Who is Merlin?</a>
-    {% else if failed_tasks_num ==3 %}
+    {% elif failed_tasks_num == 3 %}
         <p>3 task failed in total, Morgana and Assassin win!</p>
     {% else %}
         <a href="{% url 'team_makeup' game_id task_num try_num player_name%}">Next Task!</a>
