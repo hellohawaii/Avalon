@@ -143,7 +143,7 @@ def waiting_team_vote(request, game_id, task_num, try_num, player_name):
         context = {'team_members': current_try.tryteammember_set.all(),
                    'supporters': current_try.tryteamsupporter_set.all(),
                    'objectors': current_try.tryteamobjector_set.all(),
-                   'supporter_num':current_try.supporter_num,
+                   'supporter_num': current_try.supporter_num,
                    'captain_name': current_try.captain_name,
                    'game_id': game_id, 'task_num': task_num, 'try_num': try_num+1, 'player_name': player_name}
         return render(request, 'Avalon/team_make_results.html', context=context)
