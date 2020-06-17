@@ -74,6 +74,16 @@ class TryTeamObjector(models.Model):
     team = models.ForeignKey(TryTeam, on_delete=models.CASCADE)
 
 
+class TaskSupporter(models.Model):
+    player_name = models.CharField(max_length=200)
+    team = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+
+class TaskObjector(models.Model):
+    player_name = models.CharField(max_length=200)
+    team = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+
 class AssignedCharacter(models.Model):
     character = models.CharField(max_length=200)
     game = models.ForeignKey(AvalonGame, on_delete=models.CASCADE)

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from Avalon.models import AvalonGame, Task, TryTeam
+from Avalon.models import AvalonGame, TryTeamSupporter, TryTeamObjector
 import random
 
 
@@ -23,6 +23,9 @@ def create_game(request):
         game.remainedcharacter_set.create(character="Morgana")
         game.remainedcharacter_set.create(character="Assassin")
     # print(game.remained_characters)
+    if game.player_set.filter(player_name=player_name).exists():
+        # if exists, do not do other things.
+        return HttpResponseRedirect(reverse('wait_joining', args=[game_id, player_name]))
     random_character_num = game.remainedcharacter_set.count()
     random_character_i = random.randrange(0, random_character_num)
     random_character = game.remainedcharacter_set.all()[random_character_i].character
@@ -108,7 +111,8 @@ def update_team_info(request, game_id, task_num, try_num, player_name, team_size
     checkbox_results = [request.POST.get('team_member'+str(i), '') for i in range(1, 6)]
     checkbox_results = [checkbox_result for checkbox_result in checkbox_results if checkbox_result != '']
     for i in range(0, team_size):
-        current_try.tryteammember_set.create(player_name=checkbox_results[i])
+        # use get_or_create in case receiving several same POST
+        current_try.tryteammember_set.get_or_create(player_name=checkbox_results[i])
     return HttpResponseRedirect(reverse('team_makeup', args=(game_id, task_num, try_num, player_name)))
 
 
@@ -117,11 +121,17 @@ def team_makeup_vote(request, game_id, task_num, try_num, player_name):
     current_task = current_game.task_set.all()[task_num - 1]
     current_try = current_task.tryteam_set.all()[try_num - 1]
     if request.POST['team_makeup_vote'] == 'True':
-        current_try.tryteamsupporter_set.create(player_name=player_name)
-        current_try.supporter_num = current_try.supporter_num + 1
+        try:
+            current_try.tryteamsupporter_set.get(player_name=player_name)
+        except TryTeamSupporter.DoesNotExist:
+            current_try.tryteamsupporter_set.create(player_name=player_name)
+            current_try.supporter_num = current_try.supporter_num + 1
     else:
-        current_try.tryteamobjector_set.create(player_name=player_name)
-        current_try.objector_num = current_try.objector_num + 1
+        try:
+            current_try.tryteamobjector_set.get(player_name=player_name)
+        except TryTeamObjector.DoesNotExist:
+            current_try.tryteamobjector_set.create(player_name=player_name)
+            current_try.objector_num = current_try.objector_num + 1
     # TODO: Do I need to save()?
     current_try.save()
     return HttpResponseRedirect(reverse('waiting_team_vote', args=[game_id, task_num, try_num, player_name]))
@@ -172,9 +182,17 @@ def task_vote(request, game_id, task_num, player_name):
     current_game = AvalonGame.objects.get(game_id=game_id)
     current_task = current_game.task_set.all()[task_num - 1]
     if request.POST['task_vote'] == 'True':
-        current_task.success_num = current_task.success_num + 1
+        try:
+            current_task.tasksupporter_set.get(player_name=player_name)
+        except TaskSupporter.DoesNotExist:
+            current_task.tasksupporter_set.create(player_name=player_name)
+            current_task.success_num = current_task.success_num + 1
     else:
-        current_task.fail_num = current_task.fail_num + 1
+        try:
+            current_task.taskobjector_set.get(player_name=player_name)
+        except TaskObjector.DoesNotExist:
+            current_task.taskobjector_set.create(player_name=player_name)
+            current_task.fail_num = current_task.fail_num + 1
     # TODO: Do I need to save()?
     current_task.save()
     return HttpResponseRedirect(reverse('waiting_task_vote', args=[game_id, task_num, player_name]))
